@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.executor-states.request.schema.json",
+  "title": "journal.ui.executor-states request body (headers: team, operator_id, request_id, optional team_name)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["params"],
+  "properties": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["team_id"],
+      "properties": {
+        "team_id": {
+          "$ref": "defs.schema.json#/$defs/id"
+        }
+      }
+    },
+    "body": {
+      "type": "null"
+    }
+  }
+}

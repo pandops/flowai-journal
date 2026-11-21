@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/defs.schema.json",
+  "title": "journal shared definitions",
+  "$defs": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9223372036854775807
+    },
+    "nullableId": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nullableTimestamp": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/timestamp"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cursor": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "event": {
+      "type": "object",
+      "description": "A stored event: the published flat message (rule 10) with secret-named fields removed, plus journal's event_id. team_id is the derived team (for Executor events from the executor_registered projection) and executor_id the subject's Executor; an Executor connection observation in a task timeline carries the attempt and claim_seq of the claim the Executor held.",
+      "additionalProperties": true,
+      "required": [
+        "event_id",
+        "publisher",
+        "publisher_seq",
+        "team_id",
+        "occurred_at",
+        "kind"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/id"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher_seq": {
+          "$ref": "#/$defs/id"
+        },
+        "team_id": {
+          "$ref": "#/$defs/id"
+        },
+        "occurred_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "kind": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "task_id": {
+          "$ref": "#/$defs/id"
+        },
+        "attempt": {
+          "$ref": "#/$defs/id"
+        },
+        "claim_seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "executor_id": {
+          "$ref": "#/$defs/id"
+        },
+        "control_id": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "eventPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items", "next_cursor"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "next_cursor": {
+          "$ref": "#/$defs/cursor"
+        }
+      }
+    },
+    "log": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "log_chunk_id",
+        "event_id",
+        "task_id",
+        "attempt",
+        "claim_seq",
+        "executor_id",
+        "log_offset",
+        "stream",
+        "content",
+        "publisher_seq",
+        "occurred_at"
+      ],
+      "properties": {
+        "log_chunk_id": {
+          "$ref": "#/$defs/id"
+        },
+        "event_id": {
+          "$ref": "#/$defs/id"
+        },
+        "task_id": {
+          "$ref": "#/$defs/id"
+        },
+        "attempt": {
+          "$ref": "#/$defs/id"
+        },
+        "claim_seq": {
+          "$ref": "#/$defs/id"
+        },
+        "executor_id": {
+          "$ref": "#/$defs/id"
+        },
+        "log_offset": {
+          "$ref": "#/$defs/id"
+        },
+        "stream": {
+          "enum": ["work", "reasoning"]
+        },
+        "publisher_seq": {
+          "$ref": "#/$defs/id"
+        },
+        "occurred_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "stateCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "queued",
+        "pending",
+        "created",
+        "running",
+        "finished",
+        "failed",
+        "cancelled"
+      ],
+      "properties": {
+        "queued": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pending": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "created": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "running": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "finished": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cancelled": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

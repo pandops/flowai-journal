@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.executor-states.reply.schema.json",
+  "title": "journal.ui.executor-states reply (status 200)",
+  "description": "One item per Executor of the team's Executor list (executor_registered without a later executor_removed), ordered by executor_id, no pagination. connection_changed_at is the occurred_at of the event the state comes from (null while never_connected); held_claims, max_parallel_tasks and available_capacity come from the latest executor_status (null before the first).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["items"],
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "executor_id",
+          "connection_state",
+          "connection_changed_at",
+          "held_claims",
+          "max_parallel_tasks",
+          "available_capacity",
+          "reported_ip",
+          "ip_changed_at"
+        ],
+        "properties": {
+          "executor_id": {
+            "$ref": "defs.schema.json#/$defs/id"
+          },
+          "connection_state": {
+            "enum": [
+              "never_connected",
+              "connected",
+              "connection_lost",
+              "executor_lost"
+            ]
+          },
+          "connection_changed_at": {
+            "$ref": "defs.schema.json#/$defs/nullableTimestamp"
+          },
+          "held_claims": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "max_parallel_tasks": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "available_capacity": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "reported_ip": {
+            "type": ["string", "null"]
+          },
+          "ip_changed_at": {
+            "$ref": "defs.schema.json#/$defs/nullableTimestamp"
+          }
+        }
+      }
+    }
+  }
+}

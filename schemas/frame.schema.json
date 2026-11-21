@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/frame.schema.json",
+  "title": "journal team WebSocket frame (GET /v1/teams/{team_id}/stream)",
+  "description": "frame_id is the event_id of the stored event the frame carries (for task_committed, the task's first queued event); frames are ordered by frame_id alone. data is the stored event as in the read replies (task_committed, task_event, control_event, executor_event) or the log entry (task_log). task_id is null for executor_event frames.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["frame_id", "frame_type", "team_id", "task_id", "data"],
+  "properties": {
+    "frame_id": {
+      "$ref": "defs.schema.json#/$defs/id"
+    },
+    "frame_type": {
+      "enum": [
+        "task_committed",
+        "task_event",
+        "control_event",
+        "executor_event",
+        "task_log"
+      ]
+    },
+    "team_id": {
+      "$ref": "defs.schema.json#/$defs/id"
+    },
+    "task_id": {
+      "$ref": "defs.schema.json#/$defs/nullableId"
+    },
+    "data": {
+      "type": "object"
+    }
+  },
+  "if": {
+    "required": ["frame_type"],
+    "properties": { "frame_type": { "const": "task_log" } }
+  },
+  "then": {
+    "properties": { "data": { "$ref": "defs.schema.json#/$defs/log" } }
+  }
+}

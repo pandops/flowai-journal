@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.dashboard.reply.schema.json",
+  "title": "journal.ui.dashboard reply (status 200)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["period", "calendar_key", "time_zone", "counts", "buckets"],
+  "properties": {
+    "period": { "enum": ["week", "month"] },
+    "calendar_key": {
+      "type": "string",
+      "pattern": "^\\d{4}-(W\\d{2}|\\d{2})$"
+    },
+    "time_zone": { "type": "string", "minLength": 1 },
+    "counts": { "$ref": "defs.schema.json#/$defs/stateCounts" },
+    "buckets": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 31,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "at",
+          "key",
+          "label",
+          "shortLabel",
+          "total",
+          "counts",
+          "isFuture"
+        ],
+        "properties": {
+          "at": { "$ref": "defs.schema.json#/$defs/nullableTimestamp" },
+          "key": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "label": { "type": "string" },
+          "shortLabel": { "type": "string" },
+          "total": { "type": "integer", "minimum": 0 },
+          "counts": { "$ref": "defs.schema.json#/$defs/stateCounts" },
+          "isFuture": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schemas": {
+    "svc/task-manager/schemas/defs.schema.json": [
+      "task-manager",
+      "admin-panel",
+      "api-gateway",
+      "audit",
+      "env-registry",
+      "executor-registry",
+      "executor_docker_openhands",
+      "executor_k8s_openhands",
+      "journal",
+      "model-registry",
+      "source-controller"
+    ],
+    "svc/task-manager/schemas/event.queued.schema.json": [
+      "task-manager",
+      "journal"
+    ],
+    "svc/journal/schemas/defs.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/error.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/frame.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.control-events.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.control-events.request.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.dashboard.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.dashboard.request.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.executor-events.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.executor-events.request.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.executor-states.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.executor-states.request.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.task-events.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.task-events.request.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.task-logs.reply.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/journal/schemas/ui.task-logs.request.schema.json": [
+      "journal",
+      "api-gateway"
+    ],
+    "svc/executor-registry/schemas/event.executor_status.schema.json": [
+      "executor-registry",
+      "journal",
+      "task-manager"
+    ],
+    "executor/docker_openhands/schemas/executor-event.schema.json": [
+      "executor_docker_openhands",
+      "executor_k8s_openhands",
+      "journal",
+      "model-registry",
+      "task-manager"
+    ]
+  }
+}

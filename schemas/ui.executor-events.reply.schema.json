@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.executor-events.reply.schema.json",
+  "title": "journal.ui.executor-events reply (status 200)",
+  "description": "Event history of one team Executor in event_id order: executor-registry's events for it (connection_lost, connection_restored, executor_lost, executor_status, ip_changed, executor_registered, executor_removed) and the Executor's own non-task events.",
+  "$ref": "defs.schema.json#/$defs/eventPage"
+}
