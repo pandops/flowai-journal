@@ -93,7 +93,7 @@ jobs:
           git show "$source_sha:qualification/journal-declarations.json" > "$contracts/qa-e2e/scripts/shared-test-inputs.json"
 
           fetch_schema() {
-            local repo="$1" sha="$2" root="$3" file="$4" checksum="$5" status
+            local repo="$1" sha="$2" root="$3" file="$4" baseline_sha="$5" checksum="$6" status
             local url="https://raw.githubusercontent.com/pandops/$repo/${sha,,}/schemas/$file"
             local output="$root/schemas/$file"
             mkdir -p "$contracts/$root/schemas"
@@ -103,16 +103,19 @@ jobs:
               echo "Unexpected HTTP status $status for $url." >&2
               exit 1
             fi
-            printf '%s  %s\n' "$checksum" "$contracts/$output" | sha256sum --check --status
+            # The next step checks all fetched bytes against the requested pins.
+            if [[ "${sha,,}" == "$baseline_sha" ]]; then
+              printf '%s  %s\n' "$checksum" "$contracts/$output" | sha256sum --check --status
+            fi
             jq -e 'type == "object"' "$contracts/$output" > /dev/null
             printf '%s ' "$url"
             (cd "$contracts" && sha256sum "$output")
           }
 
-          fetch_schema flowai-task-manager "$TASK_MANAGER_SHA" svc/task-manager event.queued.schema.json 6ca86aa1f2d7a1bc249c2d64becbc4f9dfc8fc98ef62d2166a269821b22ed6bf
-          fetch_schema flowai-task-manager "$TASK_MANAGER_SHA" svc/task-manager defs.schema.json 5bb6eea9a1419dd7019c4a1998a83e57e71c277c3ecedd2f13f67c6a1023adc6
-          fetch_schema flowai-executor-registry "$EXECUTOR_REGISTRY_SHA" svc/executor-registry event.executor_status.schema.json 6dc9117ea7a8a175608d87f0fd469f49b56d3c3b0dc7b966c5417aa4aacfc72e
-          fetch_schema flowai-executor-docker-openhands "$EXECUTOR_DOCKER_OPENHANDS_SHA" executor/docker_openhands executor-event.schema.json 6928d3e310459c155814216b7206e4da888be58982f96bf51dbef3188821849e
+          fetch_schema flowai-task-manager "$TASK_MANAGER_SHA" svc/task-manager event.queued.schema.json fe4a5dc2bc440128c47f319412ed6eba71184d8d 6ca86aa1f2d7a1bc249c2d64becbc4f9dfc8fc98ef62d2166a269821b22ed6bf
+          fetch_schema flowai-task-manager "$TASK_MANAGER_SHA" svc/task-manager defs.schema.json fe4a5dc2bc440128c47f319412ed6eba71184d8d 5bb6eea9a1419dd7019c4a1998a83e57e71c277c3ecedd2f13f67c6a1023adc6
+          fetch_schema flowai-executor-registry "$EXECUTOR_REGISTRY_SHA" svc/executor-registry event.executor_status.schema.json f1d5686a1d55f870781468fa98df47f930f89bf7 6dc9117ea7a8a175608d87f0fd469f49b56d3c3b0dc7b966c5417aa4aacfc72e
+          fetch_schema flowai-executor-docker-openhands "$EXECUTOR_DOCKER_OPENHANDS_SHA" executor/docker_openhands executor-event.schema.json ba376bca95b6c8880480482236ff2a6f17e704cc 6928d3e310459c155814216b7206e4da888be58982f96bf51dbef3188821849e
           printf 'FLOWAI_CONTRACT_FIXTURE_DIR=%s\n' "$contracts" >> "$GITHUB_ENV"
           ) | tee "$RUNNER_TEMP/schema-inputs.log"
 
