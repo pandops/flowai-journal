@@ -1,0 +1,10 @@
+[
+  {
+    "durable": "journal",
+    "stream": "ALL_EVENT",
+    "filter_subjects": ["*.event.*.sub", "executor.event.*.*.sub"],
+    "ack_policy": "explicit",
+    "deliver_policy": "all",
+    "max_ack_pending": 256
+  }
+]

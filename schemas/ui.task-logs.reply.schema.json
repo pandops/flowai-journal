@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.task-logs.reply.schema.json",
+  "title": "journal.ui.task-logs reply (status 200)",
+  "description": "Accepted log chunks of one task in ascending log_offset order with an opaque forward cursor.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["items", "next_cursor"],
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": { "$ref": "defs.schema.json#/$defs/log" }
+    },
+    "next_cursor": { "$ref": "defs.schema.json#/$defs/cursor" }
+  }
+}

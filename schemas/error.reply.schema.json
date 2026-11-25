@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/error.reply.schema.json",
+  "title": "journal error reply body (any journal.ui.* operation, status 400, 404 or 503)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "message"],
+  "properties": {
+    "code": {
+      "enum": [
+        "invalid_request",
+        "invalid_pagination",
+        "invalid_time_zone",
+        "invalid_period",
+        "invalid_calendar",
+        "not_found",
+        "service_unavailable"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9223372036854775807
+    }
+  },
+  "description": "request_id is absent only when the request carried no valid request_id header."
+}

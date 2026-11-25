@@ -1,0 +1,23 @@
+# journal configuration (--config /etc/flowai/config.yaml).
+# Values written <...> are required deployment values.
+http:
+  listen: ":8080" # /v1/livez, /v1/readyz and GET /v1/teams/{team_id}/stream
+db:
+  host: postgres
+  port: 5432
+  user: journal
+  password: <generated>
+  name: flowai
+  schema: journal_schema
+  sslmode: verify-full # the only accepted value
+  ca_file: /run/flowai/stand-ca/ca.pem
+nats:
+  url: tls://nats:4222 # tls:// only
+  ca_file: /run/flowai/stand-ca/ca.pem
+  credentials_file: /run/flowai/nats/user.creds
+  inbox_prefix: _INBOX.journal
+  request_timeout: 5s
+gateway_token: <API Gateway service bearer token>
+cursor_keys:
+  - id: 1
+    key_hex: <32 random bytes, hex>

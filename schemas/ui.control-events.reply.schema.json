@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.control-events.reply.schema.json",
+  "title": "journal.ui.control-events reply (status 200)",
+  "description": "Control events of one control (team_id, task_id, control_id) in event_id order: control_requested and the claim holder's attributed control_acknowledged or control_failed.",
+  "$ref": "defs.schema.json#/$defs/eventPage"
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flowai.local/schemas/journal/ui.task-events.reply.schema.json",
+  "title": "journal.ui.task-events reply (status 200)",
+  "description": "Ordered selected-team task event history: lifecycle events with attempts and claims, claim_accepted, control events whose publisher is attributed, and the claim holder's own connection observations. Log chunks, ip_changed and unattributed or not_claim_holder control results are never included.",
+  "$ref": "defs.schema.json#/$defs/eventPage"
+}
