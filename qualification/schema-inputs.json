@@ -1,0 +1,26 @@
+[
+  {
+    "digest": "sha256:6ca86aa1f2d7a1bc249c2d64becbc4f9dfc8fc98ef62d2166a269821b22ed6bf",
+    "path": "schemas/event.queued.schema.json",
+    "repository": "pandops/flowai-task-manager",
+    "sourceRevision": "1398e8cc5a221dc8c39b5180f2af0a75bd826dd3"
+  },
+  {
+    "digest": "sha256:5bb6eea9a1419dd7019c4a1998a83e57e71c277c3ecedd2f13f67c6a1023adc6",
+    "path": "schemas/defs.schema.json",
+    "repository": "pandops/flowai-task-manager",
+    "sourceRevision": "1398e8cc5a221dc8c39b5180f2af0a75bd826dd3"
+  },
+  {
+    "digest": "sha256:6dc9117ea7a8a175608d87f0fd469f49b56d3c3b0dc7b966c5417aa4aacfc72e",
+    "path": "schemas/event.executor_status.schema.json",
+    "repository": "pandops/flowai-executor-registry",
+    "sourceRevision": "e257f61cfaac8249615477a4c54815c2f69637e1"
+  },
+  {
+    "digest": "sha256:6928d3e310459c155814216b7206e4da888be58982f96bf51dbef3188821849e",
+    "path": "schemas/executor-event.schema.json",
+    "repository": "pandops/flowai-executor-docker-openhands",
+    "sourceRevision": "df886aa03b31f297e00f38b332fe5404063b9d8d"
+  }
+]
